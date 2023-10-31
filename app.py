@@ -2,8 +2,8 @@
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .models.codecomplete import CodeCompletionModel
-import requests
+from models.codecomplete import CodeCompletionModel
+
 
 base_url = 'http://localhost:8000'
 app = FastAPI()

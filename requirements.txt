@@ -1,3 +1,4 @@
+torch
 transformers
 accelerate
 peft
@@ -12,3 +13,4 @@ socksio==1.0.0
 gunicorn==20.1.0
 fastapi==0.70.0
 uvicorn==0.20.0
+python-dotenv
