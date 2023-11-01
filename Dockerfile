@@ -6,6 +6,7 @@ FROM ghcr.io/pytorch/pytorch-nightly:c69b6e5-cu11.8.0
 # Set the working directory in the container to /app
 WORKDIR /app
 
+
 COPY models ./models
 
 COPY requirements.txt ./requirements.txt
