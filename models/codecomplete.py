@@ -3,28 +3,29 @@
 # Load model directly
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
-import os 
+import os
 from dotenv import load_dotenv
 
 load_dotenv()
+access_token = os.getenv('HUGGINGFACE_TOKEN')
 
-access_token = os.environ['HUGGINGFACE_TOKEN']
 
 class CodeCompletionModel():
     def __init__(self, model_name, load_in_8bit=True):
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name, 
-        use_auth_token=True,  token=access_token)
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name,
+                                                       token=access_token)
         self.model = AutoModelForCausalLM.from_pretrained(
-            model_name, load_in_8bit=load_in_8bit, use_auth_token=True, token=access_token)
+            model_name, load_in_8bit=load_in_8bit, token=access_token)
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        self.model.to(self.device)
+        # self.model.to(self.device)
         self.model.eval()
 
     def complete(self, input_string):
         vibe_check_input = self.tokenizer(input_string, return_tensors="pt")
 
         with torch.no_grad():
-            inputs = {k: v.to(self.device) for k, v in vibe_check_input.items()}
+            inputs = {k: v.to(self.device)
+                      for k, v in vibe_check_input.items()}
             outputs = self.model.generate(
                 input_ids=inputs["input_ids"],
                 attention_mask=inputs["attention_mask"],
@@ -36,6 +37,11 @@ class CodeCompletionModel():
 
             return self.tokenizer.batch_decode(outputs.detach().cpu().numpy(), skip_special_tokens=True)[0]
 
+
+
+    def list_parameters(): 
+        # return the number of parameters in the model
+          self.
 
 if __name__ == '__main__':
     code_model = CodeCompletionModel(model_name='bigcode/starcoderbase-1b')

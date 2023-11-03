@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from models.codecomplete import CodeCompletionModel
-
+from pydantic import BaseModel
 
 base_url = 'http://localhost:8000'
 app = FastAPI()
@@ -21,14 +21,21 @@ app.add_middleware(
 code_model = CodeCompletionModel(model_name='bigcode/starcoderbase-1b')
 
 
+class VisualStudioCodeCompletionRequest(BaseModel):
+    inputs: str
+    parameters: dict
+
+
 @app.post("/")
-async def request_completion(request: VisualStudioCodeCompletionRequest):
+def request_completion(request: VisualStudioCodeCompletionRequest):
     """
     Creates a completion for a given prompt.
 
     Adapted from https://github.com/pacman100/mlc-llm/blob/main/python/mlc_chat/rest.py#L214C1-L214C74, 
     this is what you'd need to run an API which returns LLM generated text.
     """
+
+    print('got req!')
     prompt = request.inputs
     if len(prompt.split(" ")) > 6000:
         diff_len = len(prompt.split(" ")) - 6000
@@ -38,11 +45,12 @@ async def request_completion(request: VisualStudioCodeCompletionRequest):
         prompt_prefix = prompt.split("<fim_siffix>")[0].split(" ")
         prompt = prompt_prefix+prompt_suffix+"<fim_middle>"
 
-    print(prompt)
+    print('prompt', prompt[:10])
 
-    msg = code_model.generate(prompt)
+    msg = code_model.complete(prompt)
 
-    print(msg)
+    print('gent txt', msg[:10])
+    print('did something get returned!!!??!?!')
     return {"generated_text": msg}
 
 

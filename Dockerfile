@@ -30,3 +30,4 @@ CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
 # sudo docker build -t jetpilot-app .
 # sudo docker run -p 8000:8000 jetpilot-app
 
+# uvicorn app:app --host 0.0.0.0 --port 8000 --reload

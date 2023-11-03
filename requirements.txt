@@ -4,6 +4,7 @@ accelerate
 peft
 datasets
 wandb
+scipy
 bitsandbytes
 huggingface-hub
 einops
