@@ -38,11 +38,6 @@ class CodeCompletionModel():
             return self.tokenizer.batch_decode(outputs.detach().cpu().numpy(), skip_special_tokens=True)[0]
 
 
-
-    def list_parameters(): 
-        # return the number of parameters in the model
-          self.
-
 if __name__ == '__main__':
     code_model = CodeCompletionModel(model_name='bigcode/starcoderbase-1b')
     input_string = '# print hello world as a class'

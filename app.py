@@ -10,13 +10,12 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
+    allow_methods=["*"],
     allow_headers=["*"],
 
 )
-
 
 code_model = CodeCompletionModel(model_name='bigcode/starcoderbase-1b')
 
