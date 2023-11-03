@@ -5,4 +5,4 @@ This repo contains the work to train (in a jupyter notebook) and deploy a small 
 
 ## Remaining Steps
 
-Model is fine-tuned and lives on HF. I figured out how to host it, and tested that on a separate environemnt. Just waiting for the updated SD card to work, set up a proxy server using ngrok, and then this thing is ready to go. 
+Model is fine-tuned and lives on HF. I figured out how to host it, and tested that on a separate environemnt. Just waiting for the updated SD card in the mail, then will set up a proxy server using ngrok, and this thing is ready to go. 
