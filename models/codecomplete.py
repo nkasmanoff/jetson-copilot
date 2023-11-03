@@ -1,6 +1,3 @@
-# given an input string, generate completed output
-
-# Load model directly
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 import os
