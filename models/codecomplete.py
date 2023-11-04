@@ -1,6 +1,3 @@
-# given an input string, generate completed output
-
-# Load model directly
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 import os
@@ -21,11 +18,11 @@ class CodeCompletionModel():
         self.model.eval()
 
     def complete(self, input_string):
-        vibe_check_input = self.tokenizer(input_string, return_tensors="pt")
+        _input = self.tokenizer(input_string, return_tensors="pt")
 
         with torch.no_grad():
             inputs = {k: v.to(self.device)
-                      for k, v in vibe_check_input.items()}
+                      for k, v in _input.items()}
             outputs = self.model.generate(
                 input_ids=inputs["input_ids"],
                 attention_mask=inputs["attention_mask"],
